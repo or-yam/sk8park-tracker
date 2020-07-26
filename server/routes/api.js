@@ -47,12 +47,9 @@ router.put('/api/parks/:rate/:parkId', function (req, res){
 router.post('/api/users/login', function (req, res){
   let {email} = req.body
   let {password} = req.body
-  // User.findOne({email : email,  password: password}).exec(function (err, user) {
-  //   res.send(user)
-  // })
-  User.aggregate([{$match: {email : email,  password: password}}],function (err, user) {
+  User.findOne({email : email,  password: password}).exec(function (err, user) {
     res.send(user)
-    })
+  })
 })
 
 router.post('/api/users/register', function (req, res){

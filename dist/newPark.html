@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add new Park</title>
+  </head>
+  <body>
+    <div id="container">
+      <div id="form">
+        <form>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter the skate park name:"
+          /><br />
+
+          <label for="styles">Choose the styles:</label><br />
+          <input type="checkbox" id="street" value="street" />
+          <label for="street">Street</label><br />
+          <input type="checkbox" id="vert" value="vert" />
+          <label for="vert">Vert</label><br />
+          <input type="checkbox" id="pump" value="pump" />
+          <label for="pump">Pump</label><br />
+
+          <label for="activityHours">What are the active hours:</label><br />
+          <input
+            type="radio"
+            class="activityHours"
+            name="active"
+            value="morning"
+          />
+          <label for="morning">Morning</label><br />
+          <input
+            type="radio"
+            class="activityHours"
+            name="active"
+            value="noon"
+          />
+          <label for="noon">Noon</label><br />
+          <input
+            type="radio"
+            class="activityHours"
+            name="active"
+            value="evening"
+          />
+          <label for="evening">Evening</label><br />
+          <input
+            type="radio"
+            class="activityHours"
+            name="active"
+            value="night"
+          />
+          <label for="night">Night</label><br />
+          <input
+            type="radio"
+            class="activityHours"
+            name="active"
+            value="allDay"
+          />
+          <label for="allDay">All Day</label><br />
+          <input
+            type="radio"
+            class="activityHours"
+            name="active"
+            value="includNight"
+          />
+          <label for="noon">Day and Night</label><br />
+          <div id="ratePark">
+            stay-away - 1
+            <input type="radio" class="rate" name="rating" value="1" />
+            <input type="radio" class="rate" name="rating" value="2" />
+            <input type="radio" class="rate" name="rating" value="3" />
+            <input type="radio" class="rate" name="rating" value="4" />
+            <input type="radio" class="rate" name="rating" value="5" />
+            5 - best
+          </div>
+          <textarea
+            name="about"
+            rows="3"
+            cols="30"
+            placeholder="About the park"
+          ></textarea>
+
+          <button id="submit">Add Park</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

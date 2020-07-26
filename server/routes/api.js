@@ -1,8 +1,10 @@
 const express = require("express");
 // const moment = require("moment");
-// const Park = require("./models/");
-// const User = require("./models/")
+const Park = require("../models/Park");
+const User = require("../models/User")
+const comment = require("../models/Comment")
 const axios = require("axios");
+
 
 const router = express.Router();
 
@@ -28,7 +30,36 @@ router.get("/api/skateparks", function(req, res) {
   });
 });
 
+router.post('/api/parks', function (req, res) {
+  let park = req.body
+  park = new Park(park);
+  park.save().then(park => res.send(park))
+})
 
+router.put('/api/parks/:rate/:parkId', function (req, res){
+//  function to calculate the rate 
+//   let newrate = 
+  // Park.findOneAndUpdate(id, {rate: newrate}, function (err, park) {
+  Park.findOneAndUpdate(id, {rate: req.query.rate}, function (err, park) {
+  park.save().then(park => res.send(park))
+  })
+})
 
+router.post('/api/users/login', function (req, res){
+  let {email} = req.body
+  let {password} = req.body
+  // User.findOne({email : email,  password: password}).exec(function (err, user) {
+  //   res.send(user)
+  // })
+  User.aggregate([{$match: {email : email,  password: password}}],function (err, user) {
+    res.send(user)
+    })
+})
+
+router.post('/api/users/register', function (req, res){
+  let user = req.body
+  user = new User(user)
+  user.save().then(user => res.send(user))
+})
 
 module.exports = router;

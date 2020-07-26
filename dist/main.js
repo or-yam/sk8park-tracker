@@ -1,6 +1,17 @@
 import { ParkManager } from './models/ParkManager.js';
 import { Renderer } from './views/Renderer.js';
 
+const parkManager = new ParkManager()
+
+let skatPark =
+        'https://www.flaticon.com/premium-icon/icons/svg/3098/3098788.svg';
+
+      let skatorUser = 'https://image.flaticon.com/icons/svg/3163/3163766.svg';
+
+      let tlvLatlng = { lat: 32.075, lng: 34.8 }; /////Tel Aviv
+
+      let optPark = { lat: 32.075, lng: 34.8 };
+
 function initMap() {
     let map = new google.maps.Map(document.getElementById('map'), {
       center: tlvLatlng,
@@ -25,7 +36,7 @@ function initMap() {
             },
           });
   
-          map.setCenter(pos);
+          map.setCenter(pos, mark);
         },
   
         function () {
@@ -46,11 +57,11 @@ function initMap() {
     }
   
   
-    for (let i = 0; i < skateParks.length; i++) {
+    for (let i = 0; i < parkManager.skateParks.length; i++) {
       let infowindow2 = new google.maps.InfoWindow({
         content:
           `<div id="siteNotice">` +
-          `<h1>${skateParks[i].name}</h1>` +
+          `<h1>${parkManager.skateParks[i].name}</h1>` +
           `<p>Weather</p>` +
           `<p>Style</p>` +
           `<p>Reviews</p>` +
@@ -58,7 +69,7 @@ function initMap() {
       });
   
       let mark1 = new google.maps.Marker({
-        position: { lat: skateParks[i].lat, lng: skateParks[i].lng },
+        position: { lat: parkManager.skateParks[i].lat, lng: parkManager.skateParks[i].lng },
         map: map,
         icon: { url: skatPark, scaledSize: new google.maps.Size(70, 70) },
       });
@@ -81,3 +92,5 @@ function initMap() {
       infoWindow3.open(map);
     });
   }
+
+  initMap()

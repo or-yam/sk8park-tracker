@@ -18,7 +18,8 @@ const getDataFromGoogle = () => {
  
 };
 
-router.get("/api/skateParks", function(req, res) {
+
+router.get("/api/skateparks", function(req, res) {
     getDataFromGoogle().then(data => {
     let filterd = data.data.results.filter(r => !r.permanently_closed).map(p => 
         ({lat :p.geometry.location.lat,
@@ -44,7 +45,7 @@ router.put('/api/parks/:rate/:parkId', function (req, res){
   })
 })
 
-router.post('/aputpi/users/login', function (req, res){
+router.post('/api/users/login', function (req, res){
   let {email} = req.body
   let {password} = req.body
   User.findOne({email : email,  password: password}).exec(function (err, user) {

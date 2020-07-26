@@ -7,6 +7,7 @@ export class ParkManager {
     const isGuest = user.guest;
     let data = await $.get(`api/skateparks/${isGuest}`);
     this._data.skateParks = data;
+    
   };
 
   addPark = async (park) => {

@@ -18,7 +18,8 @@ const getDataFromGoogle = () => {
  
 };
 
-router.get("/api/skateParks", function(req, res) {
+
+router.get("/api/skateparks", function(req, res) {
     getDataFromGoogle().then(data => {
     let filterd = data.data.results.filter(r => !r.permanently_closed).map(p => 
         ({lat :p.geometry.location.lat,

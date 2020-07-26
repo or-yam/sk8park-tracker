@@ -5,4 +5,6 @@ export class Renderer {
   //   const newHTML = template(data);
   //   $('.container').empty().append(newHTML);
   // };
+
+
 }

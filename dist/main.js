@@ -12,6 +12,11 @@ const parkManager = new ParkManager();
 //   renderWelcome(userData);
 // };
 
+// const getNewParkData = () => {
+//   const name = $('#name').val();
+//   const about = $('#id').val();
+// };
+
 $('#addPark').click(() => {
   if ($('#message').html() === '') {
     $('#message').append(
@@ -105,7 +110,14 @@ const initMap = async () => {
       position: mapsMouseEvent.latLng,
       content: question,
     });
-    console.log(mapsMouseEvent.latLng.toString()); // getting pointer location
+    let location = mapsMouseEvent.latLng
+      .toString()
+      .replace('(', '')
+      .replace(')', '')
+      .split(', ');
+    parkManager._data.tempPark.lat = Number(location[0]);
+    parkManager._data.tempPark.lng = Number(location[1]);
+    console.log(parkManager._data.tempPark)
     infoWindow3.open(map);
   });
 };

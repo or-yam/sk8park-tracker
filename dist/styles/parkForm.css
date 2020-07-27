@@ -7,10 +7,8 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-@media screen and (min-width: 40em) {
-  body {
-    font-size: 1.25em;
-  }
+form {
+  display: grid;
 }
 
 .form label,
@@ -173,7 +171,7 @@ body {
 
 .form .checkbox-input:checked + label,
 .form .option-input:checked + label {
-  color: #e9fff9;
+  color: #57a773;
 }
 
 .form .button {
@@ -208,13 +206,9 @@ body {
 }
 
 .form {
-  max-width: 40em;
   margin: 0 auto;
-  position: relative;
-  display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  align-items: flex-end;
 }
 
 .form .field {
@@ -239,15 +233,6 @@ body {
 
 .form .textarea {
   max-width: 100%;
-}
-
-.form .select {
-  text-indent: 0.01px;
-  text-overflow: '' !important;
-}
-
-.form .select::-ms-expand {
-  display: none;
 }
 
 .form .checkboxes,

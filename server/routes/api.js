@@ -29,11 +29,11 @@ router.get('/api/googleSkateparks', function (req, res) {
           name: p.name,
           default: true,
           rating: {
-            one: 2,
-            two: 4,
-            three: 4,
-            four: 24,
-            five: 31,
+            one: Math.floor(Math.random() * 101),
+            two: Math.floor(Math.random() * 101),
+            three: Math.floor(Math.random() * 101),
+            four: Math.floor(Math.random() * 101),
+            five: Math.floor(Math.random() * 101),
           },
           about: 'Cool and Fun',
         });

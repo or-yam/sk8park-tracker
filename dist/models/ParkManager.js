@@ -1,7 +1,6 @@
 export class ParkManager {
   constructor() {
-    this._data = { skateParks: [] };
-    
+    this._data = { skateParks: [], tempPark: {} };
   }
 
   calculateRating = (ratingObj) => {

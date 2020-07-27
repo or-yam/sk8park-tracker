@@ -98,7 +98,7 @@ const initMap = async () => {
   }
 
   let question =
-    '<p><a href="https://www.google.co.il/">To add this skatepark location?</a></p>'; //change href to create park form
+    '<p><a href="./views/parkForm.html">To add this skatepark location?</a></p>'; //change href to create park form
 
   map.addListener('click', function (mapsMouseEvent) {
     let infoWindow3 = new google.maps.InfoWindow({

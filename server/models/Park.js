@@ -11,7 +11,6 @@ const parkSchema = new Schema({
     pump: Boolean,
   },
   activityHours: String,
-  createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
   rating: {
     one: Number,
     two: Number,

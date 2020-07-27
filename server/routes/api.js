@@ -1,8 +1,6 @@
 const express = require('express');
-// const moment = require("moment");
 const Park = require('../models/Park');
 const User = require('../models/User');
-const comment = require('../models/Comment');
 const axios = require('axios');
 
 const router = express.Router();

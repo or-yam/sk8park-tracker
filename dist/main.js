@@ -6,17 +6,17 @@ const userManager = new UserManger();
 $('#submit-park-btn').on('click', function (event) {
   event.preventDefault();
   parkManager._data.tempPark.name = $('#park-name').val();
-  const styles = $('.style')
+  parkManager._data.tempPark.style = $('.style')
     .filter(':checked')
     .toArray()
     .map((s) => ({ [s.value]: true }));
-  console.log(styles);
-  const times = $('.time')
+  parkManager._data.tempPark.activityHours = $('.time')
     .filter(':checked')
     .toArray()
     .map((t) => t.value);
-  const rate = $('.rating').filter(':checked').val();
-  const about = $('.about').val();
+  parkManager._data.tempPark.rating = $('.rating').filter(':checked').val();
+  parkManager._data.tempPark.about = $('.about').val();
+  console.log(parkManager._data.tempPark);
 });
 
 const loginUser = async (email, password) => {
@@ -47,7 +47,7 @@ $('#goToRegister').on('click', function (event) {
 $('#registerBut').on('click', async function (event) {
   event.preventDefault();
   let userData = {
-    name: $('#registerUame').val(),
+    name: $('#registerName').val(),
     email: $('#RegisterMail').val(),
     password: $('#passwordRegister').val(),
   };

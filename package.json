@@ -18,7 +18,7 @@
     "handlebars": "^4.7.6",
     "jquery": "^3.5.1",
     "mongoose": "^5.9.24",
-    "axios": "^0.19.2",
+    "axios": "^0.19.2"
   },
   "bugs": {
     "url": "https://github.com/or-yam/sk8park-tracker/issues"

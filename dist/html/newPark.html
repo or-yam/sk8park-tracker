@@ -9,13 +9,13 @@
   <body>
     <div id="container">
       <div id="form">
-        <form>
+        <form action="../main.js">
           <input
             type="text"
             id="name"
             placeholder="Enter the skate park name:"
           /><br />
-
+<div id="styles">
           <label for="styles">Choose the styles:</label><br />
           <input type="checkbox" id="street" value="street" />
           <label for="street">Street</label><br />
@@ -23,7 +23,8 @@
           <label for="vert">Vert</label><br />
           <input type="checkbox" id="pump" value="pump" />
           <label for="pump">Pump</label><br />
-
+        </div>
+        <div id="ctiveHours">
           <label for="activityHours">What are the active hours:</label><br />
           <input
             type="radio"
@@ -67,13 +68,14 @@
             value="includNight"
           />
           <label for="noon">Day and Night</label><br />
+        </div>
           <div id="ratePark">
             stay-away - 1
-            <input type="radio" class="rate" name="rating" value="1" />
-            <input type="radio" class="rate" name="rating" value="2" />
-            <input type="radio" class="rate" name="rating" value="3" />
-            <input type="radio" class="rate" name="rating" value="4" />
-            <input type="radio" class="rate" name="rating" value="5" />
+            <input type="radio" class="rate" name="rating" value="one" />
+            <input type="radio" class="rate" name="rating" value="two" />
+            <input type="radio" class="rate" name="rating" value="three" />
+            <input type="radio" class="rate" name="rating" value="four" />
+            <input type="radio" class="rate" name="rating" value="five" />
             5 - best
           </div>
           <textarea
@@ -83,9 +85,14 @@
             placeholder="About the park"
           ></textarea>
 
+          <!-- <div id='parkInfoWindow'></div> // popup parks -->
+
           <button id="submit">Add Park</button>
         </form>
       </div>
     </div>
+
+    <script src="../jquery/dist/jquery.js"></script>
+    <script src="../main.js"></script>
   </body>
 </html>

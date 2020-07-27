@@ -5,18 +5,32 @@ const userManager = new UserManger();
 
 $('#submit-park-btn').on('click', function (event) {
   event.preventDefault();
+  parkManager._data.tempPark.default = false;
+  parkManager._data.tempPark.lat = JSON.parse(
+    localStorage.lat || '[]'
+  ).lat.toFixed(7);
+  parkManager._data.tempPark.lng = JSON.parse(
+    localStorage.lng || '[]'
+  ).lng.toFixed(7);
   parkManager._data.tempPark.name = $('#park-name').val();
-  parkManager._data.tempPark.style = $('.style')
+  let newStyles = { vert: false, street: false, pump: false };
+  $('.style')
     .filter(':checked')
     .toArray()
-    .map((s) => ({ [s.value]: true }));
+    .forEach((s) => {
+      let key = s.value;
+      if (newStyles.hasOwnProperty(key)) {
+        newStyles[key] = true;
+      }
+    });
+  parkManager._data.tempPark.style = newStyles;
   parkManager._data.tempPark.activityHours = $('.time')
     .filter(':checked')
     .toArray()
-    .map((t) => t.value);
+    .map((t) => t.value)[0];
   parkManager._data.tempPark.rating = $('.rating').filter(':checked').val();
   parkManager._data.tempPark.about = $('.about').val();
-  console.log(parkManager._data.tempPark);
+  parkManager.addPark(parkManager._data.tempPark);
 });
 
 const loginUser = async (email, password) => {
@@ -186,9 +200,12 @@ const initMap = async () => {
       .replace('(', '')
       .replace(')', '')
       .split(', ');
-    parkManager._data.tempPark.lat = Number(location[0]);
-    parkManager._data.tempPark.lng = Number(location[1]);
-    console.log(parkManager._data.tempPark);
+
+    let lat = { lat: Number(location[0]) };
+    let lng = { lng: Number(location[1]) };
+    localStorage.setItem('lat', JSON.stringify(lat));
+    localStorage.setItem('lng', JSON.stringify(lng));
+
     infoWindow3.open(map);
   });
 };

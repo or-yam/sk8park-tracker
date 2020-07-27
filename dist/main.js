@@ -1,11 +1,21 @@
 import { ParkManager } from './models/ParkManager.js';
 const parkManager = new ParkManager();
 
-// const loginUser = async (email, password) => {
-//   const credentials = { email, password };
-//   const userData = await $.post('/api/users/login', credentials);
-//   userData ? renderWelcome(userData) : renderWrong();
-// };
+// $('#submit-park-btn').on('click', function (event) {
+//   event.preventDefault();
+//   parkManager._data.tempPark.name = $('#park-name').val();
+//   parkManager._data.tempPark.styles = //
+//   const styles = $('.style')
+//     .filter(':checked')
+//     .toArray()
+//     .map((s) => {s.value});
+//   const times = $('.time')
+//     .filter(':checked')
+//     .toArray()
+//     .map((t) => t.value);
+//   const rate = $('.rating').filter(':checked').val();
+//   const about = $('.about').val();
+// });
 
 // const registerUser = async (userData) => {
 //   const user = await $.post('/api/users/register');
@@ -27,8 +37,7 @@ $('#addPark').click(() => {
   }
 });
 
-const skatParkIcon =
-  'https://www.flaticon.com/premium-icon/icons/svg/3098/3098788.svg';
+const skatParkIcon = 'https://image.flaticon.com/icons/svg/3004/3004731.svg';
 const skateUserIcon = 'https://image.flaticon.com/icons/svg/3163/3163766.svg';
 const tlvLatLng = { lat: 32.075, lng: 34.8 };
 
@@ -36,7 +45,7 @@ const initMap = async () => {
   await parkManager.getAllParks();
   let map = new google.maps.Map(document.getElementById('map'), {
     center: tlvLatLng,
-    zoom: 15,
+    zoom: 13,
   });
   let userLocationWindow = new google.maps.InfoWindow();
   if (navigator.geolocation) {
@@ -47,6 +56,7 @@ const initMap = async () => {
           lng: position.coords.longitude,
         };
         const userMark = new google.maps.Marker({
+          animation: google.maps.Animation.BOUNCE,
           position: userLocation,
           map: map,
           icon: {
@@ -82,13 +92,35 @@ const initMap = async () => {
     let parkInfoWindow = new google.maps.InfoWindow({
       //parkInfo
       content: `<div id="parkInfo">
-        <h1>Name: ${park.name}</h1> 
-        <p>Rating: ${park.rating}</p> 
-        <p>About: ${park.about}</p> 
+        <h1>${park.name}</h1>
+        <img class="imgStar" src="https://image.flaticon.com/icons/svg/991/99198${
+          park.rating
+        }.svg">
+        <div>
+        ${
+          park.style.street
+            ? "<img class='ingStyle' src='https://image.flaticon.com/icons/svg/2649/2649112.svg'>"
+            : ''
+        }
+        ${
+          park.style.vert
+            ? "<img class='ingStyle' src='https://www.flaticon.com/premium-icon/icons/svg/3098/3098788.svg'>"
+            : ''
+        }
+        ${
+          park.style.pump
+            ? "<img class='ingStyle' src='https://image.flaticon.com/icons/svg/2380/2380533.svg'>"
+            : ''
+        }
+        </div>
+        <h2>About: ${park.about}</h2>   
+        <h2>Activity Hours: ${park.activityHours}</h2>
+        <a href="https://www.google.co.il/"><img class="btnImg" src="https://image.flaticon.com/icons/svg/1076/1076337.svg"/></a>
         </div>`,
     });
 
     let parkMark = new google.maps.Marker({
+      animation: google.maps.Animation.DROP,
       position: {
         lat: park.lat,
         lng: park.lng,
@@ -103,7 +135,7 @@ const initMap = async () => {
   }
 
   let question =
-    '<p><a href="./views/parkForm.html">To add this skatepark location?</a></p>'; //change href to create park form
+    '<p><a href="./views/parkForm.html">To add this skatepark location?</a></p>';
 
   map.addListener('click', function (mapsMouseEvent) {
     let infoWindow3 = new google.maps.InfoWindow({
@@ -117,7 +149,7 @@ const initMap = async () => {
       .split(', ');
     parkManager._data.tempPark.lat = Number(location[0]);
     parkManager._data.tempPark.lng = Number(location[1]);
-    console.log(parkManager._data.tempPark)
+    console.log(parkManager._data.tempPark);
     infoWindow3.open(map);
   });
 };

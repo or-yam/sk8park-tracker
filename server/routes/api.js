@@ -36,6 +36,12 @@ router.get('/api/googleSkateparks', function (req, res) {
             five: Math.floor(Math.random() * 101),
           },
           about: 'Cool and Fun',
+          activityHours: 'ALL day',
+          style: {
+            street: true,
+            vert: true,
+            pump: true,
+          },
         });
         park.save();
       });

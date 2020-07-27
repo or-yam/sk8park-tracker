@@ -12,6 +12,16 @@ const parkManager = new ParkManager();
 //   renderWelcome(userData);
 // };
 
+$('#addPark').click(() => {
+  if ($('#message').html() === '') {
+    $('#message').append(
+      '<div id="messageContent">Mark on the map the park location</div>'
+    );
+  } else {
+    $('#message').empty();
+  }
+});
+
 const skatParkIcon =
   'https://www.flaticon.com/premium-icon/icons/svg/3098/3098788.svg';
 const skateUserIcon = 'https://image.flaticon.com/icons/svg/3163/3163766.svg';
@@ -65,13 +75,12 @@ const initMap = async () => {
 
   for (const park of parkManager._data.skateParks) {
     let parkInfoWindow = new google.maps.InfoWindow({
-      content:
-        `<div id="siteNotice">` +
-        `<h1>${park.name}</h1>` +
-        `<p>Weather</p>` +
-        `<p>Style</p>` +
-        `<p>Reviews</p>` +
-        `</div>`,
+      //parkInfo
+      content: `<div id="parkInfo">
+        <h1>Name: ${park.name}</h1> 
+        <p>Rating: ${park.rating}</p> 
+        <p>About: ${park.about}</p> 
+        </div>`,
     });
 
     let parkMark = new google.maps.Marker({
@@ -89,14 +98,14 @@ const initMap = async () => {
   }
 
   let question =
-    '<p><a href="https://www.google.co.il/">To add this skatepark location?</a></p>';
+    '<p><a href="https://www.google.co.il/">To add this skatepark location?</a></p>'; //change href to create park form
 
   map.addListener('click', function (mapsMouseEvent) {
     let infoWindow3 = new google.maps.InfoWindow({
       position: mapsMouseEvent.latLng,
       content: question,
     });
-    console.log(mapsMouseEvent.latLng.toString());
+    console.log(mapsMouseEvent.latLng.toString()); // getting pointer location
     infoWindow3.open(map);
   });
 };

@@ -1,10 +1,50 @@
 #map {
-    height: 100%;
-  }
-
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+  height: 100%;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#addPark {
+  margin-left: 20%;
+}
+#user {
+  margin-left: 55%;
+}
+.btn {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  bottom: 2%;
+  margin-left: 55%;
+  border-color: blue;
+  border-style: solid;
+}
+.btnImg {
+  width: 70px;
+  height: 70px;
+  display: block;
+  margin: auto;
+  margin-top: 15%;
+}
+#messageContent {
+  position: absolute;
+  z-index: 1;
+  width: 90%;
+  height: 10%;
+  background-color: white;
+  border-radius: 5px;
+  border-color: blue;
+  border-style: solid;
+  margin-left: 5%;
+  top: 3%;
+  text-align: center;
+  font-size: x-large;
+  padding-top: 10%;
+}

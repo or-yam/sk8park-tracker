@@ -48,9 +48,10 @@ router.get('/api/skateparks', function (req, res) {
   Park.find({}).exec((err, data) => res.send(data));
 });
 
+//create new park
 router.post('/api/parks', function (req, res) {
-  let park = req.body;
-  park = new Park(park);
+  const parkData = req.body;
+  const park = new Park(parkData);
   park.save().then((park) => res.send(park));
 });
 
@@ -63,17 +64,18 @@ router.put('/api/parks/:rate/:parkId', function (req, res) {
   });
 });
 
+//user login
 router.post('/api/users/login', function (req, res) {
-  let { email } = req.body;
-  let { password } = req.body;
-  User.findOne({ email: email, password: password }).exec(function (err, user) {
-    res.send(user);
-  });
+  const { email, password } = req.body;
+  User.findOne({ email: email, password: password }).exec((err, user) =>
+    res.send(user)
+  );
 });
 
+//user register
 router.post('/api/users/register', function (req, res) {
-  let user = req.body;
-  user = new User(user);
+  const userData = req.body;
+  const user = new User(userData);
   user.save().then((user) => res.send(user));
 });
 

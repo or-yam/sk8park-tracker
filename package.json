@@ -17,10 +17,8 @@
     "express": "^4.17.1",
     "handlebars": "^4.7.6",
     "jquery": "^3.5.1",
-    "moment": "^2.27.0",
     "mongoose": "^5.9.24",
     "axios": "^0.19.2",
-    "materialize-css": "^1.0.0-rc.2"
   },
   "bugs": {
     "url": "https://github.com/or-yam/sk8park-tracker/issues"

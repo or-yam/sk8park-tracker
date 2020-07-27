@@ -55,7 +55,6 @@ const loginUser = async (email, password) => {
   userData
     ? (window.location = 'http://localhost:3000')
     : alert('check your email and password');
-  // userData ? renderWelcome(userData) : renderWrong();
 };
 
 $('#loginBut').on('click', async function (event) {

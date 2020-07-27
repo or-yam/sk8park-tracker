@@ -48,3 +48,33 @@ body {
   font-size: x-large;
   padding-top: 10%;
 }
+
+#parkInfo {
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Shadows Into Light', cursive;
+  margin-block-start: 1px;
+}
+#parkInfo h1 {
+  text-align: center;
+  margin-block-start: 1px;
+  margin-block-end: 1px;
+  font-size: xx-large;
+}
+#parkInfo div {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+.ingStyle {
+  width: 30px;
+  height: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.imgStar {
+  color: yellow;
+  width: 50%;
+  height: 5%;
+  display: block;
+  margin: auto;
+}

@@ -55,7 +55,6 @@ router.get('/api/skateparks', function (req, res) {
 //create new park
 router.post('/api/parks', function (req, res) {
   const parkData = req.body;
-  console.log(parkData)
   parkData.lat = parseFloat(parkData.lat);
   parkData.lng = parseFloat(parkData.lng);
   const park = new Park({
@@ -64,11 +63,11 @@ router.post('/api/parks', function (req, res) {
     name: parkData.name,
     default: false,
     rating: {
-      one: Math.floor(Math.random() * 101),
-      two: Math.floor(Math.random() * 101),
-      three: Math.floor(Math.random() * 101),
-      four: Math.floor(Math.random() * 101),
-      five: Math.floor(Math.random() * 101),
+      one: parkData.rating.one,
+      two: parkData.rating.two,
+      three: parkData.rating.three,
+      four: parkData.rating.four,
+      five: parkData.rating.five
     },
     about: parkData.about,
     activityHours: parkData.activityHours,

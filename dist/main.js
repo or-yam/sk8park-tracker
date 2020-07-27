@@ -28,7 +28,22 @@ $('#submit-park-btn').on('click', function (event) {
     .filter(':checked')
     .toArray()
     .map((t) => t.value)[0];
-  parkManager._data.tempPark.rating = $('.rating').filter(':checked').val();
+
+  let newRate = {
+    one: 0,
+    two: 0,
+    three: 0,
+    four: 0,
+    five: 0,
+  };
+
+  let userRate = $('.rating').filter(':checked').val();
+  for (const key in newRate) {
+    if (key == userRate) {
+      newRate[key]++;
+    }
+  }
+  parkManager._data.tempPark.rating = newRate;
   parkManager._data.tempPark.about = $('.about').val();
   parkManager.addPark(parkManager._data.tempPark);
 });

@@ -1,111 +1,115 @@
 html {
-	-webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-	background-color: #1d3354;
-	font-family: "Oswald", sans-serif;
+  background-color: #1d3354;
+  font-family: 'Oswald', sans-serif;
 }
 
 #register {
-    display: none;
+  display: none;
 }
 
-.title{
-    color: #e9fff9;
-    font-size: 1.25em;
+.title {
+  color: #e9fff9;
+  font-size: 1.25em;
 }
 
 .form label,
-.form .checkbox-input + label, 
-.form .option-input + label, 
-.form .text-input, 
-.form .textarea, 
-.form button, {
-	padding: .75em 1em;
-	appearance: none;
-	outline: none;
-	line-height: normal;
-	border-radius: 0;
-	border: none;
-    background: none;
+.form .checkbox-input + label,
+.form .option-input + label,
+.form .text-input,
+.form button {
+  padding: 0.75em 1em;
+  appearance: none;
+  outline: none;
+  line-height: normal;
+  border-radius: 0;
+  border: none;
+  background: none;
 }
 
 .form label {
-	font-weight: bold;
-	color: #e9fff9;
-	padding-top: 0;
-	padding-left: 0;
-	letter-spacing: .025em;
-	font-size: 1em;
-	line-height: 1.25;
-	position: relative;
-	z-index: 100;
+  font-weight: bold;
+  color: #e9fff9;
+  padding-top: 0;
+  padding-left: 0;
+  letter-spacing: 0.025em;
+  font-size: 1em;
+  line-height: 1.25;
+  position: relative;
+  z-index: 100;
 }
 
-.required .form .label:after, .form .required label:after {
-	content: '\0020*';
-	color: #E8474C;
-	font-weight: normal;
-	font-size: .75em;
-	vertical-align: top;
+.required .form .label:after,
+.form .required label:after {
+  content: '\0020*';
+  color: #e8474c;
+  font-weight: normal;
+  font-size: 0.75em;
+  vertical-align: top;
 }
-.form .checkbox-input + label, 
+.form .checkbox-input + label,
 .form .option-input + label,
-.form .text-input, 
+.form .text-input,
 .form .select {
-	font: inherit;
-	line-height: normal;
-	width: 100%;
-	box-sizing: border-box;
-	background: #467599;
-	color: #e9fff9;
-	position: relative;
+  font: inherit;
+  line-height: normal;
+  width: 100%;
+  box-sizing: border-box;
+  background: #467599;
+  color: #e9fff9;
+  position: relative;
 }
 
-.form .button {
-	font: inherit;
-	line-height: normal;
-	cursor: pointer;
-	background: #E8474C;
-	color: #e9fff9;
-	font-weight: bold;
-	width: auto;
-	margin-left: auto;
-	font-weight: bold;
-	padding-left: 2em;
-    padding-right: 2em;
-    display: inline-block;
+.form .button,
+#goToRegister {
+  font: inherit;
+  line-height: normal;
+  cursor: pointer;
+  background: #e8474c;
+  color: #e9fff9;
+  font-weight: bold;
+  width: auto;
+  margin-left: auto;
+  font-weight: bold;
+  padding-left: 2em;
+  padding-right: 2em;
+  display: inline-block;
 }
 
-.form .button:hover, .form .button:focus, .form .button:active {
-	color: #e9fff9;
-	border-color: #e9fff9;
+.form .button:hover,
+.form .button:focus,
+.form .button:active {
+  color: #e9fff9;
+  border-color: #e9fff9;
 }
 
 .form .button:active {
-	position: relative;
-	top: 1px;
-	left: 1px;
+  position: relative;
+  top: 1px;
+  left: 1px;
 }
 
 .form {
-	max-width: 40em;
-	margin: 0 auto;
-	position: relative;
-	flex-flow: row wrap;
-	justify-content: space-between;
-	align-items: flex-end;
+  max-width: 40em;
+  margin: 0 auto;
+  position: relative;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .magic-focus {
-	position: absolute;
-	z-index: 0;
-	width: 0;
-	pointer-events: none;
-	background: #57a773;
-	transition: top .2s, left .2s, width .2s;
-	backface-visibility: hidden;
-	transform-style: preserve-3d;
-	will-change: top, left, width;
-	transform-origin: 0 
+  position: absolute;
+  z-index: 0;
+  width: 0;
+  pointer-events: none;
+  background: #57a773;
+  transition: top 0.2s, left 0.2s, width 0.2s;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: top, left, width;
+  transform-origin: 0;
+}

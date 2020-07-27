@@ -1,79 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>User</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../styles/loginForm.css" />
-  </head>
-  <body>
-    <div class="container" id="register">
-      <div class="title">Register:</div>
-      <form class="form">
-        <p class="field">
-          <label class="label required" for="name">Your Name:</label>
-          <input class="text-input" id="name" name="name" type="text" />
-        </p>
-        <p class="field required">
-          <label class="label" for="email">E-mail:</label>
-          <input
-            class="text-input"
-            id="email"
-            name="email"
-            
-            type="email"
-          />
-        </p>
-        <p class="field half required">
-          <label class="label" for="password">Password:</label>
-          <input
-            class="text-input"
-            id="password"
-            name="password"
-            
-            type="password"
-          />
-        </p>
-        <p class="field half">
-          <input class="button" type="submit" />
-        </p>
-      </form>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/loginForm.css">
+</head>
+<body>
+    <div class="container" id="register" Visible=false>
+        <div class='title'>Register:</div>
+        <form class="form">
+                    <p class="field">
+                      <label class="label required" for="registerName">Your Name:</label>
+                      <input class="text-input" id="registerUame" type="text"></input>
+                    </p>
+                    <p class="field required">
+                      <label class="label" for="RegisterMail">E-mail:</label>
+                      <input class="text-input" id="RegisterMail" required type="email"></input>
+                    </p>
+                    <p class="field half required">
+                      <label class="label" for="passwordRegister">Password:</label>
+                      <input class="text-input" id="passwordRegister" required type="password"></input>
+                    </p>
+                    <p class="field half">
+                      <input class="button" id="registerBut" type="submit"></input>
+                    </p>
+        </form>
     </div>
-    <div class="container" id="login">
-      <div class="title">Log In:</div>
-      <form class="form">
-        <p class="field required">
-          <label class="label" for="email">E-mail:</label>
-          <input
-            class="text-input"
-            id="email"
-            name="email"
-            required
-            type="email"
-          />
-        </p>
-        <p class="field half required">
-          <label class="label" for="password">Password:</label>
-          <input
-            class="text-input"
-            id="password"
-            name="password"
-            required
-            type="password"
-          />
-        </p>
-        <p class="field half">
-          <input id="submit-btn" class="button" type="submit" />
-        </p>
-      </form>
-    </div>
-
-    <script src="../jquery/dist/jquery.js"></script>
-    <script src="../main.js"></script>
-  </body>
+     <div class="container" id="login" Visible="true">
+            <div class='title'>Log In:</div> 
+            <form class="form">
+                        <p class="field required">
+                          <label class="label" for="emailLogin">E-mail:</label>
+                          <input class="text-input" id="emailLogin" required type="email"></input>
+                        </p>
+                        <p class="field half required">
+                          <label class="label" for="passwordLogin">Password:</label>
+                          <input class="text-input" id="passwordLogin" required type="password"></input>
+                        </p>
+                        <p class="field half">
+                          <input class="button" id="loginBut" type="submit"></input>
+                        </p>
+                        <p class="field half">
+                            <button id="goToRegister">Register</button>
+                        </p>
+            </form>
+        </div>
+    
+        <script src="../jquery/dist/jquery.js"></script>
+        <script src="../main.js" type="module"></script>
+</body>
 </html>

@@ -1,21 +1,60 @@
 import { ParkManager } from './models/ParkManager.js';
+import { UserManger } from './models/UserManager.js';
 const parkManager = new ParkManager();
+const userManager = new UserManger();
 
-// $('#submit-park-btn').on('click', function (event) {
-//   event.preventDefault();
-//   parkManager._data.tempPark.name = $('#park-name').val();
-//   parkManager._data.tempPark.styles = //
-//   const styles = $('.style')
-//     .filter(':checked')
-//     .toArray()
-//     .map((s) => {s.value});
-//   const times = $('.time')
-//     .filter(':checked')
-//     .toArray()
-//     .map((t) => t.value);
-//   const rate = $('.rating').filter(':checked').val();
-//   const about = $('.about').val();
-// });
+$('#submit-park-btn').on('click', function (event) {
+  event.preventDefault();
+  parkManager._data.tempPark.name = $('#park-name').val();
+  const styles = $('.style')
+    .filter(':checked')
+    .toArray()
+    .map((s) => ({ [s.value]: true }));
+  console.log(styles);
+  const times = $('.time')
+    .filter(':checked')
+    .toArray()
+    .map((t) => t.value);
+  const rate = $('.rating').filter(':checked').val();
+  const about = $('.about').val();
+});
+
+const loginUser = async (email, password) => {
+  const credentials = { email, password };
+  const userData = await $.post('/api/users/login', credentials);
+  userManager._userData = userData;
+  userData
+    ? (window.location = 'http://localhost:3000')
+    : alert('check your email and password');
+  // userData ? renderWelcome(userData) : renderWrong();
+};
+
+$('#loginBut').on('click', async function (event) {
+  event.preventDefault();
+  let email = $('#emailLogin').val();
+  let password = $('#passwordLogin').val();
+  await loginUser(email, password);
+  $('#emailLogin').val('');
+  $('#passwordLogin').val('');
+});
+
+$('#goToRegister').on('click', function (event) {
+  event.preventDefault();
+  $('#register').show();
+  $('#login').hide();
+});
+
+$('#registerBut').on('click', async function (event) {
+  event.preventDefault();
+  let userData = {
+    name: $('#registerUame').val(),
+    email: $('#RegisterMail').val(),
+    password: $('#passwordRegister').val(),
+  };
+  let newUser = await $.post('/api/users/register', userData);
+  userManager._userData = newUser;
+  window.location = 'http://localhost:3000';
+});
 
 // const registerUser = async (userData) => {
 //   const user = await $.post('/api/users/register');

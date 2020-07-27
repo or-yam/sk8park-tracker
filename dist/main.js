@@ -12,6 +12,11 @@ const parkManager = new ParkManager();
 //   renderWelcome(userData);
 // };
 
+// const getNewParkData = () => {
+//   const name = $('#name').val();
+//   const about = $('#id').val();
+// };
+
 $('#addPark').click(() => {
   if ($('#message').html() === '') {
     $('#message').append(

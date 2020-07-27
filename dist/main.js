@@ -1,96 +1,104 @@
 import { ParkManager } from './models/ParkManager.js';
-import { Renderer } from './views/Renderer.js';
+const parkManager = new ParkManager();
 
-const parkManager = new ParkManager()
+// const loginUser = async (email, password) => {
+//   const credentials = { email, password };
+//   const userData = await $.post('/api/users/login', credentials);
+//   userData ? renderWelcome(userData) : renderWrong();
+// };
 
-let skatPark =
-        'https://www.flaticon.com/premium-icon/icons/svg/3098/3098788.svg';
+// const registerUser = async (userData) => {
+//   const user = await $.post('/api/users/register');
+//   renderWelcome(userData);
+// };
 
-      let skatorUser = 'https://image.flaticon.com/icons/svg/3163/3163766.svg';
+const skatParkIcon =
+  'https://www.flaticon.com/premium-icon/icons/svg/3098/3098788.svg';
+const skateUserIcon = 'https://image.flaticon.com/icons/svg/3163/3163766.svg';
+const tlvLatLng = { lat: 32.075, lng: 34.8 };
 
-      let tlvLatlng = { lat: 32.075, lng: 34.8 }; /////Tel Aviv
+const initMap = async () => {
+  await parkManager.getAllParks();
+  let map = new google.maps.Map(document.getElementById('map'), {
+    center: tlvLatLng,
+    zoom: 15,
+  });
+  let userLocationWindow = new google.maps.InfoWindow();
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        const userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        const userMark = new google.maps.Marker({
+          position: userLocation,
+          map: map,
+          icon: {
+            url: skateUserIcon,
+            scaledSize: new google.maps.Size(70, 70),
+          },
+        });
+        map.setCenter(userLocation, userMark);
+      },
+      function () {
+        handleLocationError(true, userLocationWindow, map.getCenter(tlvLatLng));
+      }
+    );
+  } else {
+    handleLocationError(false, userLocationWindow, map.getCenter(tlvLatLng));
+  }
 
-      let optPark = { lat: 32.075, lng: 34.8 };
+  //handle ERROR
+  function handleLocationError(
+    browserHasGeolocation,
+    parkInfoWindow,
+    tlvLatLng
+  ) {
+    parkInfoWindow.setPosition(tlvLatLng);
+    parkInfoWindow.setContent(
+      browserHasGeolocation
+        ? 'Error: The Geolocation service failed.'
+        : "Error: Your browser doesn't support geolocation."
+    );
+  }
 
-function initMap() {
-    let map = new google.maps.Map(document.getElementById('map'), {
-      center: tlvLatlng,
-      zoom: 15,
+  for (const park of parkManager._data.skateParks) {
+    let parkInfoWindow = new google.maps.InfoWindow({
+      content:
+        `<div id="siteNotice">` +
+        `<h1>${park.name}</h1>` +
+        `<p>Weather</p>` +
+        `<p>Style</p>` +
+        `<p>Reviews</p>` +
+        `</div>`,
     });
-    let infoWindow1 = new google.maps.InfoWindow();
-  
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-  
-          let mark = new google.maps.Marker({
-            position: pos,
-            map: map,
-            icon: {
-              url: skatorUser,
-              scaledSize: new google.maps.Size(70, 70),
-            },
-          });
-  
-          map.setCenter(pos, mark);
-        },
-  
-        function () {
-          handleLocationError(true, infoWindow1, map.getCenter(tlvLatlng));
-        }
-      );
-    } else {
-      handleLocationError(false, infoWindow1, map.getCenter(tlvLatlng));
-    }
-  
-    function handleLocationError(browserHasGeolocation, infoWindow1, tlvLatlng) {
-      infoWindow1.setPosition(tlvLatlng);
-      infoWindow1.setContent(
-        browserHasGeolocation
-          ? 'Error: The Geolocation service failed.'
-          : "Error: Your browser doesn't support geolocation."
-      );
-    }
-  
-  
-    for (let i = 0; i < parkManager.skateParks.length; i++) {
-      let infowindow2 = new google.maps.InfoWindow({
-        content:
-          `<div id="siteNotice">` +
-          `<h1>${parkManager.skateParks[i].name}</h1>` +
-          `<p>Weather</p>` +
-          `<p>Style</p>` +
-          `<p>Reviews</p>` +
-          `</div>`,
-      });
-  
-      let mark1 = new google.maps.Marker({
-        position: { lat: parkManager.skateParks[i].lat, lng: parkManager.skateParks[i].lng },
-        map: map,
-        icon: { url: skatPark, scaledSize: new google.maps.Size(70, 70) },
-      });
-  
-      mark1.addListener('click', function () {
-        infowindow2.open(map, mark1);
-      });
-    }
-  
-  
-    let question =
-      '<p><a href="https://www.google.co.il/">To add this skatpark location?</a></p>';
-  
-    map.addListener('click', function (mapsMouseEvent) {
-      let infoWindow3 = new google.maps.InfoWindow({
-        position: mapsMouseEvent.latLng,
-        content: question,
-      });
-      console.log(mapsMouseEvent.latLng.toString());
-      infoWindow3.open(map);
+
+    let parkMark = new google.maps.Marker({
+      position: {
+        lat: park.lat,
+        lng: park.lng,
+      },
+      map: map,
+      icon: { url: skatParkIcon, scaledSize: new google.maps.Size(70, 70) },
+    });
+
+    parkMark.addListener('click', function () {
+      parkInfoWindow.open(map, parkMark);
     });
   }
 
-  initMap()
+  let question =
+    '<p><a href="https://www.google.co.il/">To add this skatepark location?</a></p>';
+
+  map.addListener('click', function (mapsMouseEvent) {
+    let infoWindow3 = new google.maps.InfoWindow({
+      position: mapsMouseEvent.latLng,
+      content: question,
+    });
+    console.log(mapsMouseEvent.latLng.toString());
+    infoWindow3.open(map);
+  });
+};
+
+initMap();

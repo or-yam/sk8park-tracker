@@ -3,9 +3,9 @@ export class ParkManager {
     this._data = { skateParks: [] };
   }
 
-  getAllParks = async (user) => {
-    const isGuest = user.guest;
-    let data = await $.get(`api/skateparks/${isGuest}`);
+  getAllParks = async () => {
+    // const isGuest = user.guest;
+    let data = await $.get(`api/skateparks`);
     this._data.skateParks = data;
     
   };

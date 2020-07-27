@@ -23,7 +23,6 @@ export class ParkManager {
     let data = await $.get('api/skateparks');
     data.map((p) => (p.rating = this.calculateRating(p.rating)));
     this._data.skateParks = data;
-    console.log(this._data.skateParks);
   };
 
   addPark = async (park) => {

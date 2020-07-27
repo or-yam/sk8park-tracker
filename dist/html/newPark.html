@@ -5,89 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Add new Park</title>
+    <link rel="stylesheet" href="../styles/stylePark.css">
   </head>
   <body>
     <div id="container">
-      <div id="form">
-        <form action="../main.js">
-          <input
-            type="text"
-            id="name"
-            placeholder="Enter the skate park name:"
-          /><br />
-<div id="styles">
-          <label for="styles">Choose the styles:</label><br />
-          <input type="checkbox" id="street" value="street" />
-          <label for="street">Street</label><br />
-          <input type="checkbox" id="vert" value="vert" />
-          <label for="vert">Vert</label><br />
-          <input type="checkbox" id="pump" value="pump" />
-          <label for="pump">Pump</label><br />
-        </div>
-        <div id="ctiveHours">
-          <label for="activityHours">What are the active hours:</label><br />
-          <input
-            type="radio"
-            class="activityHours"
-            name="active"
-            value="morning"
-          />
-          <label for="morning">Morning</label><br />
-          <input
-            type="radio"
-            class="activityHours"
-            name="active"
-            value="noon"
-          />
-          <label for="noon">Noon</label><br />
-          <input
-            type="radio"
-            class="activityHours"
-            name="active"
-            value="evening"
-          />
-          <label for="evening">Evening</label><br />
-          <input
-            type="radio"
-            class="activityHours"
-            name="active"
-            value="night"
-          />
-          <label for="night">Night</label><br />
-          <input
-            type="radio"
-            class="activityHours"
-            name="active"
-            value="allDay"
-          />
-          <label for="allDay">All Day</label><br />
-          <input
-            type="radio"
-            class="activityHours"
-            name="active"
-            value="includNight"
-          />
-          <label for="noon">Day and Night</label><br />
-        </div>
-          <div id="ratePark">
-            stay-away - 1
-            <input type="radio" class="rate" name="rating" value="one" />
-            <input type="radio" class="rate" name="rating" value="two" />
-            <input type="radio" class="rate" name="rating" value="three" />
-            <input type="radio" class="rate" name="rating" value="four" />
-            <input type="radio" class="rate" name="rating" value="five" />
-            5 - best
-          </div>
-          <textarea
-            name="about"
-            rows="3"
-            cols="30"
-            placeholder="About the park"
-          ></textarea>
-
-          <!-- <div id='parkInfoWindow'></div> // popup parks -->
-
-          <button id="submit">Add Park</button>
+          <form class="form" action="../main.js">
+              <p class="field required">
+                <label class="label required" for="name">Park name</label>
+                <input class="text-input" id="name" name="name" required type="text"></input>
+              </p>
+              <div class="field">
+                  <label class="label">Styles:</label>
+                  <ul class="checkboxes">
+                      <li class="checkbox">
+                        <input class="checkbox-input" id="choice-street" name="choice" type="checkbox" value="street"></input>
+                        <label class="checkbox-label" for="choice-street">Street
+                        </label>
+                      </li>
+                      <li class="checkbox">
+                        <input class="checkbox-input" id="choice-vert" name="choice" type="checkbox" value="vert"></input>
+                        <label class="checkbox-label" for="choice-vert">Vert
+                        </label>
+                      </li>
+                      <li class="checkbox">
+                        <input class="checkbox-input" id="choice-pump" name="choice" type="checkbox" value="pump"></input>
+                        <label class="checkbox-label" for="choice-pump">Pump
+                        </label>
+                      </li>
+                  </ul>
+                </div>
+              <div class="field">
+                <label class="label">What are the active hours:</label>
+                <ul class="options">
+                    <li class="option">
+                      <input class="option-input" id="option-morning" name="option" type="radio" value="morning"></input>
+                      <label class="option-label" for="option-morning">Morning</label>
+                    </li>
+                    <li class="option">
+                      <input class="option-input" id="option-noon" name="option" type="radio" value="noon"></input>
+                      <label class="option-label" for="option-noon">Noon</label>
+                    </li>
+                    <li class="option">
+                      <input class="option-input" id="option-evening" name="option" type="radio" value="evening"></input>
+                      <label class="option-label" for="option-evening">Evening</label>
+                    </li>
+                    <li class="option">
+                      <input class="option-input" id="option-night" name="option" type="radio" value="night"></input>
+                      <label class="option-label" for="option-night">Night</label>
+                    </li>
+                    <li class="option">
+                      <input class="option-input" id="option-allDay" name="option" type="radio" value="allDay"></input>
+                      <label class="option-label" for="option-allDay">All Day</label>
+                    </li>
+                    <li class="option">
+                      <input class="option-input" id="option-dayAndNight" name="option" type="radio" value="dayAndNight"></input>
+                      <label class="option-label" for="option-dayAndNight">Day and Night</label>
+                    </li>
+                </ul>
+              </div>
+              <div class="field">
+                  <label class="label rating">Rating</label>
+                  <ul class="options">
+                      <li class="option">
+                        <input class="option-input" id="option-one" name="option" type="radio" value="1"></input>
+                        <label class="option-label" for="option-one">1</label>
+                      </li>
+                      <li class="option">
+                        <input class="option-input" id="option-two" name="option" type="radio" value="2"></input>
+                        <label class="option-label" for="option-two">2</label>
+                      </li>
+                      <li class="option">
+                        <input class="option-input" id="option-three" name="option" type="radio" value="3"></input>
+                        <label class="option-label" for="option-three">3</label>
+                      </li>
+                      <li class="option">
+                        <input class="option-input" id="option-four" name="option" type="radio" value="4"></input>
+                        <label class="option-label" for="option-four">4</label>
+                      </li>
+                      <li class="option">
+                        <input class="option-input" id="option-five" name="option" type="radio" value="5"></input>
+                        <label class="option-label" for="option-five">5</label>
+                      </li>
+                  </ul>
+                </div>
+              <p class="field">
+                <label class="label" for="about">About</label>
+                <textarea class="textarea" cols="50" id="about" name="about" rows="3"></textarea>
+              </p>
+              <p class="field half">
+                  <input class="button" type="submit" value="Send"></input>
+                </p>
         </form>
       </div>
     </div>

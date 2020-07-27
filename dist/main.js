@@ -70,6 +70,21 @@ $('#registerBut').on('click', async function (event) {
   window.location = 'http://localhost:3000';
 });
 
+$('#map').on('click', '.btnImg', function () {
+  let windowInfo = $(this).closest($('.parkInfo')).html().split('_')[0];
+  let moreInfo = `<h3>Add review</h3><textarea cols="50" rows="3"></textarea>
+  <h3>Add score review</h3><input type="number" id="quantity" min="1" max="5">
+  <br><button id="backBtn">Back to map</button>`;
+  $('#map').empty();
+  $('#map').append(
+    `<div id="addComment" class="parkInfo">${windowInfo}${moreInfo}</div>`
+  );
+});
+$('#map').on('click', '#backBtn', function () {
+  $('#map').empty();
+  initMap();
+});
+
 // const registerUser = async (userData) => {
 //   const user = await $.post('/api/users/register');
 //   renderWelcome(userData);
@@ -144,7 +159,7 @@ const initMap = async () => {
   for (const park of parkManager._data.skateParks) {
     let parkInfoWindow = new google.maps.InfoWindow({
       //parkInfo
-      content: `<div id="parkInfo">
+      content: `<div class="parkInfo">
         <h1>${park.name}</h1>
         <img class="imgStar" src="https://image.flaticon.com/icons/svg/991/99198${
           park.rating
@@ -167,8 +182,10 @@ const initMap = async () => {
         }
         </div>
         <h2>About: ${park.about}</h2>   
-        <h2>Activity Hours: ${park.activityHours}</h2>
-        <a href="https://www.google.co.il/"><img class="btnImg" src="https://image.flaticon.com/icons/svg/1076/1076337.svg"/></a>
+        <h2>Activity Hours: ${
+          park.activityHours
+        }</h2>________________________________
+        <img class="btnImg" src="https://image.flaticon.com/icons/svg/1076/1076337.svg"/>
         </div>`,
     });
 

@@ -6,8 +6,6 @@ const userSchema = new Schema({
     password: String,
     email: String,
     picture: String,
-    // parksCreated : [{type: Schema.Types.ObjectId, ref: 'Park'}]
-    // comments: [{type:Schema.Types.ObjectId, ref:'Commit'}] 
 })
 
 const User = mongoose.model('User', userSchema);

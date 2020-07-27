@@ -21,12 +21,14 @@ export class ParkManager {
 
   getAllParks = async () => {
     let data = await $.get('api/skateparks');
-    data.map((p) => (p.rating = this.calculateRating(p.rating)));
+    data.map((p) =>
+      p.rating ? (p.rating = this.calculateRating(p.rating)) : (p.rating = 0)
+    );
     this._data.skateParks = data;
   };
 
   addPark = async (park) => {
-    const newPark = await $.post('api/parks');
+    const newPark = await $.post('/api/parks', park);
     this._data.skateParks.push(newPark);
   };
 

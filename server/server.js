@@ -6,19 +6,19 @@ const api = require('./routes/api');
 
 const app = express();
 
-const port = 3000
+const port = 3000;
 
-app.use(express.static(path.join(__dirname,"..", 'dist')));
-app.use(express.static(path.join(__dirname,"..", 'node_modules')));
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'node_modules')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-//app.use('strict')
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', api);
 
-mongoose.connect('mongodb://localhost/skateparkDB', { useNewUrlParser: true , useUnifiedTopology: true});
-
+mongoose.connect('mongodb://localhost/skateparkDB', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 app.listen(port, function () {
-    console.log(`Running on port ${port}`);
-  });
-  
+  console.log(`Running on port ${port}`);
+});

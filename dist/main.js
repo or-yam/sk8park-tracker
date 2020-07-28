@@ -41,6 +41,7 @@ $('#submit-park-btn').on('click', function (event) {
     .toArray()
     .map((t) => t.value)[0];
   parkManager.addPark(tempPark);
+  window.location.replace('../index.html');
 });
 
 $('#goToLogin').on('click', function (event) {

@@ -43,14 +43,13 @@ $('#submit-park-btn').on('click', function (event) {
   parkManager.addPark(tempPark);
 });
 
-const loginUser = async (email, password) => {
-  const credentials = { email, password };
-  const userData = await $.post('/api/users/login', credentials);
-  userManager._userData = userData;
-  userData
-    ? (window.location = 'http://localhost:3000')
-    : alert('check your email and password');
-};
+$('#goToLogin').on('click', function (event) {
+  event.preventDefault();
+  $('#map').hide();
+  $('#addPark').hide();
+  $('#user').hide();
+  $('#login').show();
+});
 
 $('#loginBut').on('click', async function (event) {
   event.preventDefault();
@@ -59,7 +58,27 @@ $('#loginBut').on('click', async function (event) {
   await loginUser(email, password);
   $('#emailLogin').val('');
   $('#passwordLogin').val('');
+  let userLogedin = userManager._userData;
+  $('#map').show();
+  userManager._userData = userLogedin;
+  console.log(userManager._userData);
 });
+
+const loginUser = async (email, password) => {
+  $('#map').hide();
+  $('#login').show();
+  $('#addPark').show();
+  $('#user').show();
+  const credentials = { email, password };
+  const userData = await $.post('/api/users/login', credentials);
+  userManager._userData = userData;
+  $('#login').show() && $('#map').hide()
+    ? $('#login').hide() && $('#map').show() //(window.location = 'http://localhost:3000')
+    : alert('check your email and password');
+  // userData ? renderWelcome(userData) : renderWrong();
+};
+
+
 
 $('#goToRegister').on('click', function (event) {
   event.preventDefault();
@@ -94,16 +113,6 @@ $('#map').on('click', '#backBtn', function () {
   initMap();
 });
 
-// const registerUser = async (userData) => {
-//   const user = await $.post('/api/users/register');
-//   renderWelcome(userData);
-// };
-
-// const getNewParkData = () => {
-//   const name = $('#name').val();
-//   const about = $('#id').val();
-// };
-
 $('#addPark').click(() => {
   if ($('#message').html() === '') {
     $('#message').append(
@@ -119,7 +128,10 @@ const skateUserIcon = 'https://image.flaticon.com/icons/svg/3163/3163766.svg';
 const tlvLatLng = { lat: 32.075, lng: 34.8 };
 
 const initMap = async () => {
+  $('#register').hide();
+  $('#login').hide();
   await parkManager.getAllParks();
+
   let map = new google.maps.Map(document.getElementById('map'), {
     center: tlvLatLng,
     zoom: 13,

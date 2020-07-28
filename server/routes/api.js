@@ -57,26 +57,7 @@ router.post('/api/parks', function (req, res) {
   const parkData = req.body;
   parkData.lat = parseFloat(parkData.lat);
   parkData.lng = parseFloat(parkData.lng);
-  const park = new Park({
-    lat: parkData.lat,
-    lng: parkData.lng,
-    name: parkData.name,
-    default: false,
-    rating: {
-      one: parkData.rating.one,
-      two: parkData.rating.two,
-      three: parkData.rating.three,
-      four: parkData.rating.four,
-      five: parkData.rating.five
-    },
-    about: parkData.about,
-    activityHours: parkData.activityHours,
-    style: {
-      street: parkData.style.street,
-      vert: parkData.style.vert,
-      pump: parkData.style.pump,
-    },
-  });
+  const park = new Park(parkData);
   park.save().then((park) => res.send(park));
 });
 

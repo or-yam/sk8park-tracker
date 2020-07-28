@@ -5,14 +5,7 @@ const userManager = new UserManger();
 
 $('#submit-park-btn').on('click', function (event) {
   event.preventDefault();
-  parkManager._data.tempPark.default = false;
-  parkManager._data.tempPark.lat = JSON.parse(
-    localStorage.lat || '[]'
-  ).lat.toFixed(7);
-  parkManager._data.tempPark.lng = JSON.parse(
-    localStorage.lng || '[]'
-  ).lng.toFixed(7);
-  parkManager._data.tempPark.name = $('#park-name').val();
+  const { tempPark } = parkManager._data;
   let newStyles = { vert: false, street: false, pump: false };
   $('.style')
     .filter(':checked')
@@ -23,12 +16,6 @@ $('#submit-park-btn').on('click', function (event) {
         newStyles[key] = true;
       }
     });
-  parkManager._data.tempPark.style = newStyles;
-  parkManager._data.tempPark.activityHours = $('.time')
-    .filter(':checked')
-    .toArray()
-    .map((t) => t.value)[0];
-
   let newRate = {
     one: 0,
     two: 0,
@@ -36,16 +23,24 @@ $('#submit-park-btn').on('click', function (event) {
     four: 0,
     five: 0,
   };
-
   let userRate = $('.rating').filter(':checked').val();
   for (const key in newRate) {
     if (key == userRate) {
       newRate[key]++;
     }
   }
-  parkManager._data.tempPark.rating = newRate;
-  parkManager._data.tempPark.about = $('.about').val();
-  parkManager.addPark(parkManager._data.tempPark);
+  tempPark.rating = newRate;
+  tempPark.about = $('.about').val();
+  tempPark.default = false;
+  tempPark.lat = JSON.parse(localStorage.lat || '[]').lat.toFixed(7);
+  tempPark.lng = JSON.parse(localStorage.lng || '[]').lng.toFixed(7);
+  tempPark.name = $('#park-name').val();
+  tempPark.style = newStyles;
+  tempPark.activityHours = $('.time')
+    .filter(':checked')
+    .toArray()
+    .map((t) => t.value)[0];
+  parkManager.addPark(tempPark);
 });
 
 const loginUser = async (email, password) => {

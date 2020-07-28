@@ -1,6 +1,6 @@
 export class ParkManager {
   constructor() {
-    this._data = { skateParks: [], tempPark: {} };
+    this._data = { skateParks: [], tempPark: {}, tempInfo : {} };
   }
 
   calculateRating = (ratingObj) => {
@@ -31,6 +31,14 @@ export class ParkManager {
     const newPark = await $.post('/api/parks', park);
     this._data.skateParks.push(newPark);
   };
+
+  addComment = async (comment) => {
+    const newComment = await $.post('/api/parks/comments', comment)
+    Park.findOne({_id: this._data.tempPark._id}, function(err, comments) {
+
+    })
+    this._data.comments.push(newComment)
+  }
 
   giveRating = async (rate) => {
     await $.ajax({

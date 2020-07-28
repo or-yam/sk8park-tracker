@@ -1,6 +1,7 @@
 const express = require('express');
 const Park = require('../models/Park');
 const User = require('../models/User');
+const Comment = require('../models/Comment')
 const axios = require('axios');
 
 const router = express.Router();
@@ -84,5 +85,11 @@ router.post('/api/users/register', function (req, res) {
   const user = new User(userData);
   user.save().then((user) => res.send(user));
 });
+
+router.post('/api/parks/comments', function (req, res) {
+  const commentDate = req.body;
+  const comment = new Comment(commentDate);
+  comment.save().then(comment => res.send(comment))
+})
 
 module.exports = router;

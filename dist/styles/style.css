@@ -9,31 +9,36 @@ body {
 }
 #addPark {
   margin-left: 20%;
+  display: inline;
 }
-#user {
-  margin-left: 55%;
-}
+
 .btn {
   cursor: pointer;
   position: absolute;
   z-index: 1;
-  background-color: white;
-  border-radius: 50px;
   width: 100px;
   height: 100px;
   bottom: 2%;
   margin-left: 55%;
-  border-color: blue;
-  border-style: solid;
 }
+
 .btnImg {
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
   display: block;
   margin: auto;
   margin-top: 15%;
 }
+
+#goToLogin {
+  border-radius: 50px;
+  border-color: #1d3354;
+  border-style: solid;
+  background-color: #e9fff9;
+}
 #messageContent {
+  font-family: "Open Sans", sans-serif;
+  font-family: "Shadows Into Light", cursive;
   position: absolute;
   z-index: 1;
   width: 90%;
@@ -49,22 +54,24 @@ body {
   padding-top: 10%;
 }
 
+.gm-style .gm-style-iw-c {
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 600; 
+}
 #parkInfo {
-  font-family: 'Open Sans', sans-serif;
-  font-family: 'Shadows Into Light', cursive;
   margin-block-start: 1px;
 }
 #parkInfo h1 {
   text-align: center;
-  margin-block-start: 1px;
-  margin-block-end: 1px;
   font-size: xx-large;
 }
+
 #parkInfo div {
   display: block;
   margin: auto;
   text-align: center;
 }
+
 .ingStyle {
   width: 30px;
   height: 30px;
@@ -84,7 +91,7 @@ body {
   z-index: 1;
   width: 100%;
   height: 100%;
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS1IWo9wiGjghsATWmz-xZh5K-O0VUswF3USA&usqp=CAU');
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS1IWo9wiGjghsATWmz-xZh5K-O0VUswF3USA&usqp=CAU");
   background-repeat: no-repeat;
   background-size: 100vw 100vmax;
   background-color: lightblue;
@@ -101,7 +108,7 @@ body {
   border-color: blue;
   border-style: solid;
   margin-top: 20px;
-  font-family: 'Open Sans', sans-serif;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Shadows Into Light", cursive;
   font-size: x-large;
 }

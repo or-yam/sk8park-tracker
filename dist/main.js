@@ -43,6 +43,23 @@ $('#submit-park-btn').on('click', function (event) {
   parkManager.addPark(tempPark);
 });
 
+$('#map').on('click','#commitTheRerview',async function (event) {
+  event.preventDefault()
+  let today = new Date();
+  let date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear()
+  let commentData =  {
+    text: $('#commitText').val(),
+    time: date, 
+    author:  userManager._userData.name,
+    park:  $(this).find('.parkInfo').data('id')
+  }
+  console.log(commentData.park)
+  let newComment = await $.post('/api/parks/comments', commentData);
+  parkManager.tempInfo = newComment;
+  $('#commitText').val('')
+  console.log(parkManager.tempInfo)
+})
+
 $('#goToLogin').on('click', function (event) {
   event.preventDefault();
   $('#map').hide();
@@ -62,6 +79,7 @@ $('#loginBut').on('click', async function (event) {
   $('#map').show();
   userManager._userData = userLogedin;
   console.log(userManager._userData);
+ 
 });
 
 const loginUser = async (email, password) => {
@@ -77,8 +95,6 @@ const loginUser = async (email, password) => {
     : alert('check your email and password');
   // userData ? renderWelcome(userData) : renderWrong();
 };
-
-
 
 $('#goToRegister').on('click', function (event) {
   event.preventDefault();
@@ -100,12 +116,15 @@ $('#registerBut').on('click', async function (event) {
 
 $('#map').on('click', '.btnImg', function () {
   let windowInfo = $(this).closest($('.parkInfo')).html().split('_')[0];
-  let moreInfo = `<h3>Add review</h3><textarea cols="50" rows="3"></textarea>
+  let parkID = $(this).closest($('.parkInfo')).data('id')
+
+  let moreInfo = `<h3 id='commitTheRerview'>Add review</h3><textarea id="commitText" cols="50" rows="3"></textarea>
   <h3>Add score review</h3><input type="number" id="quantity" min="1" max="5">
   <br><button id="backBtn">Back to map</button>`;
+  
   $('#map').empty();
   $('#map').append(
-    `<div id="addComment" class="parkInfo">${windowInfo}${moreInfo}</div>`
+    `<div id="addComment" class="parkInfo" data-id="${parkID}">${windowInfo}${moreInfo}</div>`
   );
 });
 $('#map').on('click', '#backBtn', function () {
@@ -177,10 +196,11 @@ const initMap = async () => {
     );
   }
 
+
   for (const park of parkManager._data.skateParks) {
     let parkInfoWindow = new google.maps.InfoWindow({
-      //parkInfo
-      content: `<div class="parkInfo">
+      
+            content: `<div class="parkInfo" data-id="${park._id}">
         <h1>${park.name}</h1>
         <img class="imgStar" src="https://image.flaticon.com/icons/svg/991/99198${
           park.rating

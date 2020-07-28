@@ -10,75 +10,76 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/style.css" />
-    <link rel="stylesheet" href="./styles/loginForm.css">
+    <link rel="stylesheet" href="./styles/loginForm.css" />
   </head>
   <body>
     <div id="message"></div>
-    <div id="addPark" class="btn" Visible=true>
+    <div id="addPark" class="btn" Visible="true">
       <img
-        class="btnImg" 
+        class="btnImg"
         src="https://image.flaticon.com/icons/svg/992/992482.svg"
         alt=""
       />
     </div>
-    <div id="user" class="btn" Visible=true>
-        <img
-          class="btnImg" id='goToLogin'
-          src="https://image.flaticon.com/icons/svg/3163/3163766.svg"
-          alt=""
-      /></a>
+    <div id="user" class="btn" Visible="true">
+      <img
+        class="btnImg"
+        id="goToLogin"
+        src="https://image.flaticon.com/icons/svg/3163/3163766.svg"
+        alt=""
+      />
     </div>
     <div id="map" Visible="true"></div>
 
     <div class="container" id="register" Visible="false">
-        <div class="title">Register:</div>
-        <form class="form">
-          <p class="field">
-            <label class="label required" for="registerName">Your Name:</label>
-            <input class="text-input" id="registerName" type="text" />
-          </p>
-          <p class="field required">
-            <label class="label" for="RegisterMail">E-mail:</label>
-            <input class="text-input" id="RegisterMail" required type="email" />
-          </p>
-          <p class="field half required">
-            <label class="label" for="passwordRegister">Password:</label>
-            <input
-              class="text-input"
-              id="passwordRegister"
-              required
-              type="password"
-            />
-          </p>
-          <p class="field half">
-            <input class="button" id="registerBut" type="submit" />
-          </p>
-        </form>
-      </div>
-      <div class="container" id="login" Visible="false">
-        <div class="title">Log In:</div>
-        <form class="form">
-          <p class="field required">
-            <label class="label" for="emailLogin">E-mail:</label>
-            <input class="text-input" id="emailLogin" required type="email" />
-          </p>
-          <p class="field half required">
-            <label class="label" for="passwordLogin">Password:</label>
-            <input
-              class="text-input"
-              id="passwordLogin"
-              required
-              type="password"
-            />
-          </p>
-          <p class="field half">
-            <input class="button" id="loginBut" type="submit" />
-          </p>
-          <p class="field half">
-            <button id="goToRegister">Register</button>
-          </p>
-        </form>
-      </div>
+      <div class="title">Register:</div>
+      <form class="form">
+        <p class="field">
+          <label class="label required" for="registerName">Your Name:</label>
+          <input class="text-input" id="registerName" type="text" />
+        </p>
+        <p class="field required">
+          <label class="label" for="RegisterMail">E-mail:</label>
+          <input class="text-input" id="RegisterMail" required type="email" />
+        </p>
+        <p class="field half required">
+          <label class="label" for="passwordRegister">Password:</label>
+          <input
+            class="text-input"
+            id="passwordRegister"
+            required
+            type="password"
+          />
+        </p>
+        <p class="field half">
+          <input class="button" id="registerBut" type="submit" />
+        </p>
+      </form>
+    </div>
+    <div class="container" id="login" Visible="false">
+      <div class="title">Log In:</div>
+      <form class="form">
+        <p class="field required">
+          <label class="label" for="emailLogin">E-mail:</label>
+          <input class="text-input" id="emailLogin" required type="email" />
+        </p>
+        <p class="field half required">
+          <label class="label" for="passwordLogin">Password:</label>
+          <input
+            class="text-input"
+            id="passwordLogin"
+            required
+            type="password"
+          />
+        </p>
+        <p class="field half">
+          <input class="button" id="loginBut" type="submit" />
+        </p>
+        <p class="field half">
+          <button id="goToRegister">Register</button>
+        </p>
+      </form>
+    </div>
 
     <script src="/jquery/dist/jquery.js"></script>
     <script src="main.js" type="module"></script>

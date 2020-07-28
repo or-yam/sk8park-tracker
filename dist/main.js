@@ -45,6 +45,7 @@ $('#submit-park-btn').on('click', function (event) {
 
 $('#goToLogin').on('click', function (event) {
   event.preventDefault();
+  $('#bless').hide();
   $('#map').hide();
   $('#addPark').hide();
   $('#user').hide();
@@ -58,13 +59,13 @@ $('#loginBut').on('click', async function (event) {
   await loginUser(email, password);
   $('#emailLogin').val('');
   $('#passwordLogin').val('');
-  let userLogedin = userManager._userData;
+  let userLogedIn = userManager._userData;
   $('#map').show();
-  userManager._userData = userLogedin;
-  console.log(userManager._userData);
+  userManager._userData = userLogedIn;
 });
 
 const loginUser = async (email, password) => {
+  $('#bless').hide();
   $('#map').hide();
   $('#login').show();
   $('#addPark').show();
@@ -72,18 +73,22 @@ const loginUser = async (email, password) => {
   const credentials = { email, password };
   const userData = await $.post('/api/users/login', credentials);
   userManager._userData = userData;
+  $('#bless').empty();
+  welcomeUser('Hello ');
   $('#login').show() && $('#map').hide()
-    ? $('#login').hide() && $('#map').show() //(window.location = 'http://localhost:3000')
+    ? $('#login').hide() &&
+      $('#map').show() &&
+      $('#user').hide() &&
+      $('#bless').show()
     : alert('check your email and password');
-  // userData ? renderWelcome(userData) : renderWrong();
+  initMap();
 };
-
-
 
 $('#goToRegister').on('click', function (event) {
   event.preventDefault();
   $('#register').show();
   $('#login').hide();
+  $('#bless').hide();
 });
 
 $('#registerBut').on('click', async function (event) {
@@ -95,7 +100,12 @@ $('#registerBut').on('click', async function (event) {
   };
   let newUser = await $.post('/api/users/register', userData);
   userManager._userData = newUser;
-  window.location = 'http://localhost:3000';
+  $('#bless').empty();
+  welcomeUser('Hello ');
+  $('#addPark').show();
+  $('#map').show();
+  $('#bless').show();
+  initMap();
 });
 
 $('#map').on('click', '.btnImg', function () {
@@ -123,6 +133,22 @@ $('#addPark').click(() => {
   }
 });
 
+const welcomeUser = (bless) => {
+  $('body').append(
+    `<h1 Visible=false id="bless">${bless}${userManager._userData.name}</h1>`
+  );
+};
+// var time = new Date().toLocaleTimeString().slice(0, 1);
+// if (time > 6 && time < 14) {
+//   welcomeUser('Good morning ');
+// } else if (time >= 14 && time < 18) {
+//   welcomeUser('Good afternoon ');
+// } else if (time >= 18 && time < 22) {
+//   welcomeUser('Good evening ');
+// } else {
+//   welcomeUser('Good night ');
+// }
+
 const skatParkIcon = 'https://image.flaticon.com/icons/svg/3004/3004731.svg';
 const skateUserIcon = 'https://image.flaticon.com/icons/svg/3163/3163766.svg';
 const tlvLatLng = { lat: 32.075, lng: 34.8 };
@@ -130,7 +156,11 @@ const tlvLatLng = { lat: 32.075, lng: 34.8 };
 const initMap = async () => {
   $('#register').hide();
   $('#login').hide();
-  await parkManager.getAllParks();
+  if (userManager._userData.name === 'guest') {
+    await parkManager.getAllParks('guest');
+  } else {
+    await parkManager.getAllParks();
+  }
 
   let map = new google.maps.Map(document.getElementById('map'), {
     center: tlvLatLng,

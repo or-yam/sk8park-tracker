@@ -19,12 +19,20 @@ export class ParkManager {
     return Math.floor(multi / sum);
   };
 
-  getAllParks = async () => {
-    let data = await $.get('api/skateparks');
-    data.map((p) =>
-      p.rating ? (p.rating = this.calculateRating(p.rating)) : (p.rating = 0)
-    );
-    this._data.skateParks = data;
+  getAllParks = async (guest) => {
+    if (!guest) {
+      let data = await $.get('/api/skateparks');
+      data.map((p) =>
+        p.rating ? (p.rating = this.calculateRating(p.rating)) : (p.rating = 0)
+      );
+      this._data.skateParks = data;
+    } else {
+      let data = await $.get('/api/skateparks/guest');
+      data.map((p) =>
+        p.rating ? (p.rating = this.calculateRating(p.rating)) : (p.rating = 0)
+      );
+      this._data.skateParks = data;
+    }
   };
 
   addPark = async (park) => {
@@ -37,6 +45,5 @@ export class ParkManager {
       url: `api/parks/${rate}`,
       type: 'PUT',
     });
-    console.log('updated');
   };
 }

@@ -52,6 +52,11 @@ router.get('/api/skateparks', function (req, res) {
   Park.find({}).exec((err, data) => res.send(data));
 });
 
+//get default parks
+router.get('/api/skateparks/guest', function (req, res) {
+  Park.find({ default: true }).exec((err, data) => res.send(data));
+});
+
 //create new park
 router.post('/api/parks', function (req, res) {
   const parkData = req.body;

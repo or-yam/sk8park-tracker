@@ -105,3 +105,13 @@ body {
   font-family: 'Shadows Into Light', cursive;
   font-size: x-large;
 }
+
+#bless {
+  position: absolute;
+  z-index: 1;
+  bottom: 82%;
+  text-align: center;
+  margin-left: 5%;
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Shadows Into Light', cursive;
+}

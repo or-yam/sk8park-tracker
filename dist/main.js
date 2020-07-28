@@ -33,24 +33,43 @@ $('#submit-park-btn').on('click', function (event) {
   parkManager.addPark(parkManager._data.tempPark);
 });
 
-const loginUser = async (email, password) => {
-  const credentials = { email, password };
-  const userData = await $.post('/api/users/login', credentials);
-  userManager._userData = userData;
-  userData
-    ? (window.location = 'http://localhost:3000')
-    : alert('check your email and password');
-  // userData ? renderWelcome(userData) : renderWrong();
-};
-
-$('#loginBut').on('click', async function (event) {
+$('#goToLogin').on('click', function (event) {
   event.preventDefault();
+  $('#map').hide()
+  $('#addPark').hide()
+  $('#user').hide()
+  $('#login').show()
+})
+
+$('#loginBut').on('click', async function(event){
+  event.preventDefault()
   let email = $('#emailLogin').val();
   let password = $('#passwordLogin').val();
   await loginUser(email, password);
   $('#emailLogin').val('');
   $('#passwordLogin').val('');
-});
+  let userLogedin = userManager._userData
+  $('#map').show()
+  userManager._userData = userLogedin
+  console.log(userManager._userData)
+})
+ 
+const loginUser = async (email, password) => {
+  $('#map').hide()
+  $('#login').show()
+  $('#addPark').show()
+  $('#user').show()
+  const credentials = { email, password };
+  const userData = await $.post('/api/users/login', credentials);
+  userManager._userData = userData;
+  $('#login').show() && $('#map').hide()
+  
+    ? $('#login').hide() && $('#map').show() //(window.location = 'http://localhost:3000')
+    : alert('check your email and password');
+  // userData ? renderWelcome(userData) : renderWrong();
+};
+
+
 
 $('#goToRegister').on('click', function (event) {
   event.preventDefault();

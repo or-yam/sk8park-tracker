@@ -48,6 +48,9 @@ body {
   font-size: x-large;
   padding-top: 10%;
 }
+#register, #login {
+  display: none;
+}
 
 #parkInfo {
   font-family: 'Open Sans', sans-serif;

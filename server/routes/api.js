@@ -2,11 +2,12 @@ const express = require('express');
 const Park = require('../models/Park');
 const User = require('../models/User');
 const axios = require('axios');
+require('dotenv').config();
 
 const router = express.Router();
 
 const getDataFromGoogle = () => {
-  const API_KEY = 'AIzaSyDayIjgDn311gKQQSC1ElzUeRw3Ww7Ixu4';
+  const API_KEY = process.env.MAPS_API_KEY;
   const radius = 300000;
   const lat = 31.7683;
   const lng = 35.2137;

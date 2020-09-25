@@ -50,7 +50,6 @@ router.get('/api/googleSkateparks', function (req, res) {
 
 //get all parks from db
 router.get('/api/skateparks', function (req, res) {
-  console.log('hello')
   Park.find({}).exec((err, data) => res.send(data));
 });
 

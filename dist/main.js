@@ -124,7 +124,7 @@ $('#map').on('click', '#backBtn', function () {
   initMap();
 });
 
-$('#addPark').click(() => {
+$('#addPark').on('click', () => {
   if ($('#message').html() === '') {
     $('#message').append(
       '<div id="messageContent">Mark on the map the park location</div>'

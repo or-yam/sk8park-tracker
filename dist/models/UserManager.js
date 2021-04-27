@@ -1,14 +1,14 @@
 export class UserManger {
   constructor() {
     this._userData = {
-      name:'guest'
+      name: 'guest'
     };
   }
   updateUser = async () => {
     const email = this._userData.email;
-    let userData = await $.ajax({
+    const userData = await $.ajax({
       url: `api/users/${email}`,
-      type: 'PUT',
+      type: 'PUT'
     });
     this._userData = userData;
   };

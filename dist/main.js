@@ -3,29 +3,34 @@ import { UserManger } from './models/UserManager.js';
 const parkManager = new ParkManager();
 const userManager = new UserManger();
 
-$('#submit-park-btn').on('click', function (event) {
+const renderPage = page => {};
+
+$('#submit-park-btn').on('click', event => {
   event.preventDefault();
   const { tempPark } = parkManager._data;
-  let newStyles = { vert: false, street: false, pump: false };
+  const newStyles = { vert: false, street: false, pump: false };
   $('.style')
     .filter(':checked')
     .toArray()
-    .forEach((s) => {
-      let key = s.value;
+    .forEach(s => {
+      const key = s.value;
       if (newStyles.hasOwnProperty(key)) {
         newStyles[key] = true;
       }
     });
-  let newRate = {
+
+  const newRate = {
     one: 0,
     two: 0,
     three: 0,
     four: 0,
-    five: 0,
+    five: 0
   };
-  let userRate = $('.rating').filter(':checked').val();
+
+  const userRate = $('.rating').filter(':checked').val();
+
   for (const key in newRate) {
-    if (key == userRate) {
+    if (key === userRate) {
       newRate[key]++;
     }
   }
@@ -39,12 +44,12 @@ $('#submit-park-btn').on('click', function (event) {
   tempPark.activityHours = $('.time')
     .filter(':checked')
     .toArray()
-    .map((t) => t.value)[0];
+    .map(t => t.value)[0];
   parkManager.addPark(tempPark);
   window.location.replace('../index.html');
 });
 
-$('#goToLogin').on('click', function (event) {
+$('#goToLogin').on('click', event => {
   event.preventDefault();
   $('#bless').hide();
   $('#map').hide();
@@ -53,16 +58,16 @@ $('#goToLogin').on('click', function (event) {
   $('#login').show();
 });
 
-$('#loginBut').on('click', async function (event) {
+$('#loginBut').on('click', async event => {
   event.preventDefault();
-  let email = $('#emailLogin').val();
-  let password = $('#passwordLogin').val();
+  const email = $('#emailLogin').val();
+  const password = $('#passwordLogin').val();
   await loginUser(email, password);
   $('#emailLogin').val('');
   $('#passwordLogin').val('');
-  let userLogedIn = userManager._userData;
+  const userLoggedIn = userManager._userData;
   $('#map').show();
-  userManager._userData = userLogedIn;
+  userManager._userData = userLoggedIn;
 });
 
 const loginUser = async (email, password) => {
@@ -77,29 +82,26 @@ const loginUser = async (email, password) => {
   $('#bless').empty();
   welcomeUser('Hello ');
   $('#login').show() && $('#map').hide()
-    ? $('#login').hide() &&
-      $('#map').show() &&
-      $('#user').hide() &&
-      $('#bless').show()
+    ? $('#login').hide() && $('#map').show() && $('#user').hide() && $('#bless').show()
     : alert('check your email and password');
   initMap();
 };
 
-$('#goToRegister').on('click', function (event) {
+$('#goToRegister').on('click', event => {
   event.preventDefault();
   $('#register').show();
   $('#login').hide();
   $('#bless').hide();
 });
 
-$('#registerBut').on('click', async function (event) {
+$('#registerBut').on('click', async event => {
   event.preventDefault();
-  let userData = {
+  const userData = {
     name: $('#registerName').val(),
     email: $('#RegisterMail').val(),
-    password: $('#passwordRegister').val(),
+    password: $('#passwordRegister').val()
   };
-  let newUser = await $.post('/api/users/register', userData);
+  const newUser = await $.post('/api/users/register', userData);
   userManager._userData = newUser;
   $('#bless').empty();
   welcomeUser('Hello ');
@@ -109,35 +111,29 @@ $('#registerBut').on('click', async function (event) {
   initMap();
 });
 
-$('#map').on('click', '.btnImg', function () {
-  let windowInfo = $(this).closest($('.parkInfo')).html().split('_')[0];
-  let moreInfo = `<h3>Add review</h3><textarea cols="50" rows="3"></textarea>
+$('#map').on('click', '.btnImg', () => {
+  const windowInfo = $(this).closest($('.parkInfo')).html().split('_')[0];
+  const moreInfo = `<h3>Add review</h3><textarea cols="50" rows="3"></textarea>
   <h3>Add score review</h3><input type="number" id="quantity" min="1" max="5">
   <br><button id="backBtn">Back to map</button>`;
   $('#map').empty();
-  $('#map').append(
-    `<div id="addComment" class="parkInfo">${windowInfo}${moreInfo}</div>`
-  );
+  $('#map').append(`<div id="addComment" class="parkInfo">${windowInfo}${moreInfo}</div>`);
 });
-$('#map').on('click', '#backBtn', function () {
+$('#map').on('click', '#backBtn', () => {
   $('#map').empty();
   initMap();
 });
 
 $('#addPark').on('click', () => {
   if ($('#message').html() === '') {
-    $('#message').append(
-      '<div id="messageContent">Mark on the map the park location</div>'
-    );
+    $('#message').append('<div id="messageContent">Mark on the map the park location</div>');
   } else {
     $('#message').empty();
   }
 });
 
-const welcomeUser = (bless) => {
-  $('body').append(
-    `<h1 Visible=false id="bless">${bless}${userManager._userData.name}</h1>`
-  );
+const welcomeUser = bless => {
+  $('body').append(`<h1 Visible=false id="bless">${bless}${userManager._userData.name}</h1>`);
 };
 // var time = new Date().toLocaleTimeString().slice(0, 1);
 // if (time > 6 && time < 14) {
@@ -163,17 +159,17 @@ const initMap = async () => {
     await parkManager.getAllParks();
   }
 
-  let map = new google.maps.Map(document.getElementById('map'), {
+  const map = new google.maps.Map(document.getElementById('map'), {
     center: tlvLatLng,
-    zoom: 13,
+    zoom: 13
   });
-  let userLocationWindow = new google.maps.InfoWindow();
+  const userLocationWindow = new google.maps.InfoWindow();
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      function (position) {
+      position => {
         const userLocation = {
           lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          lng: position.coords.longitude
         };
         const userMark = new google.maps.Marker({
           animation: google.maps.Animation.BOUNCE,
@@ -181,12 +177,12 @@ const initMap = async () => {
           map: map,
           icon: {
             url: skateUserIcon,
-            scaledSize: new google.maps.Size(70, 70),
-          },
+            scaledSize: new google.maps.Size(70, 70)
+          }
         });
         map.setCenter(userLocation, userMark);
       },
-      function () {
+      () => {
         handleLocationError(true, userLocationWindow, map.getCenter(tlvLatLng));
       }
     );
@@ -195,11 +191,7 @@ const initMap = async () => {
   }
 
   //handle ERROR
-  function handleLocationError(
-    browserHasGeolocation,
-    parkInfoWindow,
-    tlvLatLng
-  ) {
+  function handleLocationError(browserHasGeolocation, parkInfoWindow, tlvLatLng) {
     parkInfoWindow.setPosition(tlvLatLng);
     parkInfoWindow.setContent(
       browserHasGeolocation
@@ -213,42 +205,30 @@ const initMap = async () => {
       //parkInfo
       content: `<div class="parkInfo">
         <h1>${park.name}</h1>
-        <img class="imgStar" src="https://image.flaticon.com/icons/svg/991/99198${
-          park.rating
-        }.svg">
+        <img class="imgStar" src="https://image.flaticon.com/icons/svg/991/99198${park.rating}.svg">
         <div>
-        ${
-          park.style.street
-            ? "<img class='ingStyle' src='https://image.flaticon.com/icons/svg/2649/2649112.svg'>"
-            : ''
-        }
+        ${park.style.street ? "<img class='ingStyle' src='https://image.flaticon.com/icons/svg/2649/2649112.svg'>" : ''}
         ${
           park.style.vert
             ? "<img class='ingStyle' src='https://www.flaticon.com/premium-icon/icons/svg/3098/3098788.svg'>"
             : ''
         }
-        ${
-          park.style.pump
-            ? "<img class='ingStyle' src='https://image.flaticon.com/icons/svg/2380/2380533.svg'>"
-            : ''
-        }
+        ${park.style.pump ? "<img class='ingStyle' src='https://image.flaticon.com/icons/svg/2380/2380533.svg'>" : ''}
         </div>
         <h2>About: ${park.about}</h2>   
-        <h2>Activity Hours: ${
-          park.activityHours
-        }</h2>________________________________
+        <h2>Activity Hours: ${park.activityHours}</h2>________________________________
         <img class="btnImg" src="https://image.flaticon.com/icons/svg/1076/1076337.svg"/>
-        </div>`,
+        </div>`
     });
 
     let parkMark = new google.maps.Marker({
       animation: google.maps.Animation.DROP,
       position: {
         lat: park.lat,
-        lng: park.lng,
+        lng: park.lng
       },
       map: map,
-      icon: { url: skatParkIcon, scaledSize: new google.maps.Size(70, 70) },
+      icon: { url: skatParkIcon, scaledSize: new google.maps.Size(70, 70) }
     });
 
     parkMark.addListener('click', function () {
@@ -256,22 +236,17 @@ const initMap = async () => {
     });
   }
 
-  let question =
-    '<p><a href="./views/parkForm.html">To add this skatepark location?</a></p>';
+  const question = '<p><a href="./views/parkForm.html">To add this skatepark location?</a></p>';
 
   map.addListener('click', function (mapsMouseEvent) {
-    let infoWindow3 = new google.maps.InfoWindow({
+    const infoWindow3 = new google.maps.InfoWindow({
       position: mapsMouseEvent.latLng,
-      content: question,
+      content: question
     });
-    let location = mapsMouseEvent.latLng
-      .toString()
-      .replace('(', '')
-      .replace(')', '')
-      .split(', ');
+    const location = mapsMouseEvent.latLng.toString().replace('(', '').replace(')', '').split(', ');
 
-    let lat = { lat: Number(location[0]) };
-    let lng = { lng: Number(location[1]) };
+    const lat = { lat: Number(location[0]) };
+    const lng = { lng: Number(location[1]) };
     localStorage.setItem('lat', JSON.stringify(lat));
     localStorage.setItem('lng', JSON.stringify(lng));
 
